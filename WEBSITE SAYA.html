@@ -1,0 +1,553 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   IT Support Job Application
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Background overlay */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .bg-overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5);
+      animation: slowZoom 30s ease-in-out infinite alternate;
+    }
+    @keyframes slowZoom {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.1);
+      }
+    }
+    /* Animations for form columns */
+    .fade-slide-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-out;
+    }
+    .fade-slide-in:nth-child(1) {
+      animation-name: fadeSlideIn1;
+      animation-duration: 0.8s;
+      animation-delay: 0.3s;
+    }
+    .fade-slide-in:nth-child(2) {
+      animation-name: fadeSlideIn2;
+      animation-duration: 0.8s;
+      animation-delay: 0.6s;
+    }
+    .fade-slide-in:nth-child(3) {
+      animation-name: fadeSlideIn3;
+      animation-duration: 0.8s;
+      animation-delay: 0.9s;
+    }
+    .fade-slide-in:nth-child(4) {
+      animation-name: fadeSlideIn4;
+      animation-duration: 0.8s;
+      animation-delay: 1.2s;
+    }
+    .fade-slide-in:nth-child(5) {
+      animation-name: fadeSlideIn5;
+      animation-duration: 0.8s;
+      animation-delay: 1.5s;
+    }
+    @keyframes fadeSlideIn1 {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeSlideIn2 {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeSlideIn3 {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeSlideIn4 {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeSlideIn5 {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Button hover animation */
+    .btn-animated {
+      position: relative;
+      overflow: hidden;
+      transition: color 0.3s ease;
+    }
+    .btn-animated::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.3) 100%
+      );
+      transform: translateY(-50%) skewX(-20deg);
+      transition: left 0.5s ease;
+      pointer-events: none;
+    }
+    .btn-animated:hover::before {
+      left: 100%;
+    }
+    /* 2D editing effect on skills cards */
+    .skill-card {
+      perspective: 600px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border-radius: 0.5rem;
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+      background: rgba(55, 48, 163, 0.7);
+      padding: 1.5rem;
+      color: white;
+    }
+    .skill-card:hover {
+      transform: rotateY(15deg) rotateX(10deg) scale(1.05);
+      box-shadow: 0 20px 30px rgba(99, 102, 241, 0.8);
+    }
+    .skill-card i {
+      color: #a5b4fc;
+      margin-bottom: 1rem;
+    }
+    /* Project card hover */
+    .project-card {
+      background: rgba(55, 48, 163, 0.7);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      color: white;
+    }
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.8);
+    }
+    /* Section heading underline */
+    .section-title {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.25rem;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background: #6366f1;
+      bottom: 0;
+      left: 0;
+      border-radius: 2px;
+      box-shadow: 0 0 8px #6366f1;
+    }
+    /* Animated floating icons background for Projects */
+    .floating-icons {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 0;
+    }
+    .floating-icon {
+      position: absolute;
+      font-size: 2.5rem;
+      color: rgba(99, 102, 241, 0.15);
+      animation: floatUpDown 6s ease-in-out infinite;
+      user-select: none;
+    }
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: translateY(0);
+        opacity: 0.15;
+      }
+      50% {
+        transform: translateY(-20px);
+        opacity: 0.3;
+      }
+    }
+    /* Contact details styling */
+    .contact-details {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(55, 48, 163, 0.7);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.6);
+      color: white;
+    }
+    .contact-details h3 {
+      border-bottom: 2px solid #6366f1;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-size: 1.75rem;
+      text-align: center;
+      text-shadow: 0 0 6px #6366f1;
+    }
+    .contact-details ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .contact-details li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 4px rgba(0,0,0,0.7);
+    }
+    .contact-details li i {
+      color: #a5b4fc;
+      min-width: 28px;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+  </style>
+ </head>
+ <body class="relative min-h-screen text-gray-100">
+  <div aria-hidden="true" class="bg-overlay">
+   <img alt="Office environment with multiple computer screens, cables, and IT support staff working on hardware and software" height="1080" src="C:\Users\MD AXY\Desktop\WEBSITE\webiste pribadi\background.jpg" width="1920"/>
+  </div>
+  <header class="flex items-center justify-between p-6 max-w-7xl mx-auto">
+   <div class="flex items-center space-x-4">
+    <img alt="Profile photo of IT Support applicant smiling wearing headset and casual shirt" class="rounded-full border-4 border-white shadow-lg" height="80" src="\Users\MD AXY\Desktop\WEBSITE\webiste pribadi\Pas Foto.jpg" width="80"/>
+    <h1 class="text-3xl font-bold drop-shadow-lg">
+     Muhamad Luthfi Alfian
+    </h1>
+   </div>
+   <nav class="hidden md:flex space-x-8 font-semibold text-white drop-shadow-lg">
+    <a class="hover:text-indigo-400 transition" href="#about">
+     About Me
+    </a>
+    <a class="hover:text-indigo-400 transition" href="#skills">
+     Skills
+    </a>
+    <a class="hover:text-indigo-400 transition" href="#projects">
+     Projects
+    </a>
+    <a class="hover:text-indigo-400 transition" href="#contact">
+     Contact
+    </a>
+    <a class="hover:text-indigo-400 transition" href="#apply">
+     Apply
+    </a>
+   </nav>
+   <button aria-label="Toggle menu" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" id="menu-btn">
+    <i class="fas fa-bars fa-lg">
+    </i>
+   </button>
+  </header>
+  <nav aria-hidden="true" class="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 text-white flex flex-col items-center justify-center space-y-8 text-2xl font-semibold transform -translate-y-full transition-transform duration-300" id="mobile-menu">
+   <a class="hover:text-indigo-400 transition" href="#about" onclick="toggleMenu()">
+    About Me
+   </a>
+   <a class="hover:text-indigo-400 transition" href="#skills" onclick="toggleMenu()">
+    Skills
+   </a>
+   <a class="hover:text-indigo-400 transition" href="#projects" onclick="toggleMenu()">
+    Projects
+   </a>
+   <a class="hover:text-indigo-400 transition" href="#contact" onclick="toggleMenu()">
+    Contact
+   </a>
+   <a class="hover:text-indigo-400 transition" href="#apply" onclick="toggleMenu()">
+    Apply
+   </a>
+   <button class="mt-8 px-6 py-2 border border-indigo-400 rounded hover:bg-indigo-400 hover:text-black transition" onclick="toggleMenu()">
+    Close
+   </button>
+  </nav>
+  <main class="max-w-5xl mx-auto px-6 pb-20 relative">
+   <section class="bg-white bg-opacity-20 backdrop-blur-md rounded-xl p-8 mt-12 shadow-lg fade-slide-in" id="about" style="animation-delay: 0.3s">
+    <h2 class="text-4xl font-extrabold mb-4 text-indigo-300 drop-shadow-md section-title">
+     About Me
+    </h2>
+    <p class="text-lg leading-relaxed text-white drop-shadow-md">
+     Hello! I'm IT Support Specialist with 2 years of experience providing technical support for hardware, software, and networks. Successfully managed and maintained over 50 computer systems, ensuring smooth daily operations and resolving technical issues with a high level of user satisfaction.
+    </p>
+   </section>
+   <section class="bg-white bg-opacity-20 backdrop-blur-md rounded-xl p-8 mt-12 shadow-lg fade-slide-in" id="skills" style="animation-delay: 0.6s">
+    <h2 class="text-4xl font-extrabold mb-6 text-indigo-300 drop-shadow-md section-title">
+     Skills
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-white drop-shadow-md">
+     <div class="skill-card">
+      <i class="fas fa-network-wired fa-3x mb-4"></i>
+      <h3 class="text-2xl font-semibold mb-2">
+       Network Troubleshooting
+      </h3>
+      <p>
+       Diagnosing and resolving LAN/WAN connectivity issues, configuring routers and switches.
+      </p>
+     </div>
+     <div class="skill-card">
+      <i class="fas fa-headset fa-3x mb-4"></i>
+      <h3 class="text-2xl font-semibold mb-2">
+       Customer Support
+      </h3>
+      <p>
+       Providing friendly and effective technical support to end-users via phone, chat, and email.
+      </p>
+     </div>
+     <div class="skill-card">
+      <i class="fas fa-tools fa-3x mb-4"></i>
+      <h3 class="text-2xl font-semibold mb-2">
+       Hardware &amp; Software
+      </h3>
+      <p>
+       Installing, maintaining, and repairing computer hardware and software applications,and repairing Printer.
+      </p>
+     </div>
+    </div>
+   </section>
+   <section class="relative bg-white bg-opacity-20 backdrop-blur-md rounded-xl p-8 mt-12 shadow-lg fade-slide-in" id="projects" style="animation-delay: 0.9s; overflow: visible;">
+    <h2 class="text-4xl font-extrabold mb-6 text-indigo-300 drop-shadow-md section-title relative z-10">
+     Projects
+    </h2>
+    <p class="text-white mb-8 max-w-3xl mx-auto drop-shadow-md text-center relative z-10">
+     Here are some of the IT Support Specialist projects I have worked on, showcasing my skills in troubleshooting, network management, and user support.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+     <article class="project-card">
+      <h3 class="text-2xl font-semibold mb-2">
+       Network Infrastructure 
+      </h3>
+      <p>
+        Creating a computer network involves planning the type and topology of the network, setting up hardware such as routers and switches, connecting devices with cables or wirelessly, and configuring network and security settings, which ends with connectivity testing to ensure data can exchange properly.
+      </p>
+     </article>
+     <article class="project-card">
+      <h3 class="text-2xl font-semibold mb-2">
+       Tecnical Support Hardware
+      </h3>
+      <p>
+        Computer and printer hardware repair is the process of troubleshooting and repairing damaged physical components to restore them to optimal function. This involves physical inspection, cleaning, diagnosing problems, replacing damaged components, and ensuring all cables and connections are properly and securely installed to prevent further damage.
+      </p>
+     </article>
+     <article class="project-card">
+      <h3 class="text-2xl font-semibold mb-2">
+       System Support Database
+      </h3>
+      <p>
+        MySQL as a DBMS, and SQLyog as a visual aid for database administration and maintenance. Describe how you use SQLyog to optimize database performance, ensure data availability through automated backups, and keep data synchronized across servers.
+      </p>
+     </article>
+     <article class="project-card">
+      <h3 class="text-2xl font-semibold mb-2">
+      Editing Grafis 2D
+      </h3>
+      <P>
+        Experienced in both vector and raster-based graphic design. Skilled in creating professional logos, layouts, and print materials using CorelDRAW, as well as advanced photo editing, digital illustrations, and visual content design with Photoshop for both print and digital media.
+      </P>
+     </article>
+    </div>
+    <div aria-hidden="true" class="floating-icons">
+     <i class="fas fa-network-wired floating-icon" style="top: 10%; left: 15%; animation-delay: 0s;"></i>
+     <i class="fas fa-headset floating-icon" style="top: 40%; left: 80%; animation-delay: 2s;"></i>
+     <i class="fas fa-tools floating-icon" style="top: 70%; left: 30%; animation-delay: 4s;"></i>
+     <i class="fas fa-shield-alt floating-icon" style="top: 20%; left: 50%; animation-delay: 1.5s;"></i>
+     <i class="fas fa-laptop-code floating-icon" style="top: 60%; left: 70%; animation-delay: 3.5s;"></i>
+    </div>
+   </section>
+   <section class="bg-white bg-opacity-20 backdrop-blur-md rounded-xl p-8 mt-12 shadow-lg fade-slide-in" id="experience" style="animation-delay: 1.2s">
+    <h2 class="text-4xl font-extrabold mb-6 text-indigo-300 drop-shadow-md section-title">
+     Experience
+    </h2>
+    <div class="space-y-6 text-white drop-shadow-md">
+     <article class="bg-indigo-700 bg-opacity-50 rounded-lg p-6 shadow-lg transform hover:scale-105 transition-transform duration-300">
+      <h3 class="text-2xl font-semibold mb-1">
+       IT Support Specialist
+      </h3>
+      <p class="italic mb-2">
+       PT Asoka Indonesia. — 2023 to Present
+      </p>
+      <ul class="list-disc list-inside">
+       <li>
+        Delivered comprehensive technical support to end-users, ensuring optimal performance of hardware, software, and network systems. Proficient in system installation, configuration, and maintenance, as well as implementing robust network security measures. Experienced in providing user training, troubleshooting complex issues, and documenting technical incidents for continuous improvement.
+       </li>
+     </article>
+     <article class="bg-indigo-700 bg-opacity-50 rounded-lg p-6 shadow-lg transform hover:scale-105 transition-transform duration-300">
+      <h3 class="text-2xl font-semibold mb-1">
+       IT Support Technician (Internship)
+      </h3>
+      <p class="italic mb-2">
+      PT MEISHA BERKAH TECNOLOGY — 2019 - 2019 (3 Mounth)
+      </p>
+      <ul class="list-disc list-inside">
+       <li>
+        Provided assistance in troubleshooting hardware, software, and network issues within the company. Supported system installation, configuration, and maintenance under the supervision of senior IT staff. Assisted in monitoring network security, installing updates, and performing regular system checks. Helped end-users with technical guidance and basic software training, while documenting support activities for reporting purposes.
+       </li>
+     </article>
+    </div>
+   </section>
+   <section class="bg-white bg-opacity-20 backdrop-blur-md rounded-xl p-8 mt-12 shadow-lg fade-slide-in" id="contact" style="animation-delay: 1.5s">
+    <h2 class="text-4xl font-extrabold mb-6 text-indigo-300 drop-shadow-md section-title text-center">
+     Contact Me
+    </h2>
+    <p class="text-center text-white mb-8 drop-shadow-md text-lg max-w-xl mx-auto">
+     Feel free to reach out to me through the contact details below. I am available and happy to connect!
+    </p>
+    <div class="contact-details">
+     <h3>Contact Details</h3>
+     <ul>
+      <li>
+       <i class="fas fa-envelope"></i>
+       <span>muhamadluthfi3488@gmail.com</span>
+      </li>
+      <li>
+       <i class="fab fa-whatsapp"></i>
+       <span>+62 838-3154-8299</span>
+      </li>
+      <li>
+       <i class="fab fa-telegram-plane"></i>
+       <span>@luthfialfian24</span>
+      </li>
+      <li>
+       <i class="fab fa-linkedin-in"></i>
+       <span>linkedin.com/in/luthfialfian</span>
+      </li>
+      <li>
+       <i class="fab fa-instagram"></i>
+       <span>@alfianltf24</span>
+      </li>
+     </ul>
+    </div>
+   </section>
+  <footer class="text-center text-white py-10 bg-black bg-opacity-50 mt-120">
+   <p>
+    Muhamad Luthfi Alfian Website. All rights reserved.
+   </p>
+  </footer>
+  <script>
+   // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function toggleMenu() {
+      if (mobileMenu.style.transform === 'translateY(0%)') {
+        mobileMenu.style.transform = 'translateY(-100%)';
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      } else {
+        mobileMenu.style.transform = 'translateY(0%)';
+        mobileMenu.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+
+    // Form validation and submission animation
+    const form = document.getElementById('application-form');
+    const formMessage = document.getElementById('form-message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Clear previous errors
+      ['fullName', 'email', 'phone', 'coverLetter', 'resume'].forEach((id) => {
+        document.getElementById(`error-${id}`).classList.add('hidden');
+      });
+      formMessage.textContent = '';
+      formMessage.classList.remove('text-green-400', 'text-red-400');
+
+      let valid = true;
+
+      // Validate full name
+      const fullName = form.fullName.value.trim();
+      if (!fullName) {
+        document.getElementById('error-fullName').classList.remove('hidden');
+        valid = false;
+      }
+
+      // Validate email
+      const email = form.email.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        document.getElementById('error-email').classList.remove('hidden');
+        valid = false;
+      }
+
+      // Validate phone
+      const phone = form.phone.value.trim();
+      if (!phone) {
+        document.getElementById('error-phone').classList.remove('hidden');
+        valid = false;
+      }
+
+      // Validate cover letter
+      const coverLetter = form.coverLetter.value.trim();
+      if (!coverLetter) {
+        document.getElementById('error-coverLetter').classList.remove('hidden');
+        valid = false;
+      }
+
+      // Validate resume file
+      const resume = form.resume.files[0];
+      if (!resume || resume.type !== 'application/pdf') {
+        document.getElementById('error-resume').classList.remove('hidden');
+        valid = false;
+      }
+
+      if (!valid) {
+        formMessage.textContent = 'Please fix the errors above and try again.';
+        formMessage.classList.add('text-red-400');
+        return;
+      }
+
+      // Animate submit button and show success message
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      formMessage.textContent = 'Submitting your application...';
+      formMessage.classList.remove('text-red-400');
+      formMessage.classList.add('text-indigo-300');
+
+      // Simulate submission delay
+      setTimeout(() => {
+        formMessage.textContent = 'Thank you! Your application has been submitted successfully.';
+        formMessage.classList.remove('text-indigo-300');
+        formMessage.classList.add('text-green-400');
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        form.reset();
+      }, 2500);
+    });
+  </script>
+ </body>
+</html>
